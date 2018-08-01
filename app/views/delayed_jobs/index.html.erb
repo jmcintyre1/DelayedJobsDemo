@@ -20,18 +20,18 @@
   </tr>
 
 	<% @delayed_jobs.each do |delayed_job| %>
-    <tr>
+    <% if delayed_job.last_error.present? %>
+      <% background_color = "ff4c4c" %>
+    <% else %>
+      <% background_color = "ffffff" %>
+    <% end %>
+    <tr bgcolor = "#<%= background_color %>">
       <td><%= link_to delayed_job.id, delayed_job_path(delayed_job) %></td>
       <td><%= delayed_job.queue %></td>
       <td><%= delayed_job.priority %></td>
       <td><%= delayed_job.attempts %></td>
       <td><%= delayed_job.created_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
       <td><%= delayed_job.run_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
-      <td>
-      <% if delayed_job.last_error.present? %>
-        <%= delayed_job.last_error.first(25) %>
-      <% end %>  
-      </td>
       <td><%= button_to "Placeholder", queue_delayed_job_path(delayed_job) %></td>
       <td><%= button_to "Delete", delayed_job_path(delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, style: "color: red;" %></td>
     </tr>
@@ -39,5 +39,3 @@
 </table>
 
 <%= link_to 'Jobs', controller: 'job_items'%>
-
-<%= link_to("Delayed Web", "/jobs", target: :_blank) %>
