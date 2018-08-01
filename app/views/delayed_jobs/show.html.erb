@@ -1,0 +1,18 @@
+<h1>Job <%= @delayed_job.id %></h1>
+
+<%= link_to 'Back', delayed_jobs_path %>
+
+
+<h3>Handler:</h3>
+<pre><%= @delayed_job.handler %></pre>
+
+<h3>Last Error:</h3>
+<pre>
+<% if @delayed_job.last_error.present? %>
+    <%= @delayed_job.last_error %>
+<% else %>
+No Previous Error
+<% end %>
+</pre>
+
+<%= button_to 'Delete', delayed_job_path(@delayed_job), method: :delete, data: { confirm: 'Are you sure?' }, style: "color: red;" %>

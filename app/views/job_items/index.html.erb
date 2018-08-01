@@ -1,0 +1,21 @@
+<h1>Listing jobs</h1>
+
+<%= link_to 'Back', delayed_jobs_path %> 
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th colspan = "3">Actions</th>
+  </tr>
+ 
+  <% @job_items.each do |job| %>
+    <tr>
+      <td><%= job.title %></td>
+      <td><%= link_to 'Show', job_item_path(job) %></td>
+      <td><%= link_to 'Delete', job_item_path(job), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Talk', talk_path, remote: true %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New job', new_job_item_path %>
