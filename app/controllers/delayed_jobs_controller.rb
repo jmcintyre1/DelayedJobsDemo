@@ -1,34 +1,34 @@
 class DelayedJobsController < ApplicationController
-    
-    def show
-        @delayed_job = Delayed::Job.find(params[:id])
+  
+  def show
+    @delayed_job = Delayed::Job.find(params[:id])
+  end
+
+  def destroy
+    @delayed_job = Delayed::Job.find(params[:id])
+    @delayed_job.destroy
+
+  	redirect_to delayed_jobs_path
+  end
+
+  def index
+    @delayed_jobs = if params[:term]
+        Delayed::Job.where('id LIKE ? OR queue LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
+    else
+        Delayed::Job.all
     end
+  end
 
-    def destroy
-        @delayed_job = Delayed::Job.find(params[:id])
-        @delayed_job.destroy
+  def queue
+    @delayed_job = Delayed::Job.find(params[:id])
+    @delayed_job.queue!
 
-        redirect_to delayed_jobs_path
-    end
+    redirect_to delayed_jobs_path
+  end
 
-    def index
-        @delayed_jobs = if params[:term]
-            Delayed::Job.where('id LIKE ? OR queue LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
-        else
-            Delayed::Job.all
-        end
-    end
-
-    def queue
-        @delayed_job = Delayed::Job.find(params[:id])
-        @delayed_job.queue!
-
-        redirect_to delayed_jobs_path
-    end
-
-    private
-    def delayed_job_params
-        params.require(:delayed_job).permit(:id, :queue)
-    end
+  private
+  def delayed_job_params
+    params.require(:delayed_job).permit(:id, :queue)
+  end
 
 end
