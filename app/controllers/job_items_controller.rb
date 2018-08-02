@@ -21,10 +21,12 @@ class JobItemsController < ApplicationController
   end
 
   def talk
-  	JobItemsController.delay(:queue => "talk", :priority => 8).speak
+    @job = JobItem.find(params[:id])
+  	JobItemsController.delay(:queue => "talk", :priority => 8).speak(@job)
   end
 
-  def self.speak
+  def self.speak(job)
+    job.title = job.title
     p "hello"
   end
 

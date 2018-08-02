@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  #resources :job_items
-  #get '/talk' => 'job_items#talk'
-
   resources :delayed_jobs, :except => [:new, :create, :update, :edit] do
     member do
       post :run
