@@ -15,7 +15,6 @@
     <th>Attempts</th>
 	  <th>Created At</th>
     <th>Run At</th>
-    <th>Last Error</th>
     <th colspan = "2">Actions</th>
   </tr>
 
@@ -32,7 +31,7 @@
       <td><%= delayed_job.attempts %></td>
       <td><%= delayed_job.created_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
       <td><%= delayed_job.run_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
-      <td><%= button_to "Placeholder", queue_delayed_job_path(delayed_job) %></td>
+      <td><%= button_to "Run Job", run_delayed_job_path(delayed_job) %></td>
       <td><%= button_to "Delete", delayed_job_path(delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, style: "color: red;" %></td>
     </tr>
   <% end %>

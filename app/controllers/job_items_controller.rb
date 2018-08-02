@@ -21,11 +21,11 @@ class JobItemsController < ApplicationController
   end
 
   def talk
-  	JobItemsController.delay(:queue => "talk", :priority => 5).speak
+  	JobItemsController.delay(:queue => "talk", :priority => 8).speak
   end
 
   def self.speak
-    puts "Hello"
+    p "hello"
   end
 
   def index

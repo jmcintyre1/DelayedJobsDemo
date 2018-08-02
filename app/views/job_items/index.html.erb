@@ -13,7 +13,7 @@
       <td><%= job.title %></td>
       <td><%= link_to 'Show', job_item_path(job) %></td>
       <td><%= link_to 'Delete', job_item_path(job), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <td><%= link_to 'Talk', talk_path, remote: true %></td>
+      <td><%= link_to 'Talk', talk_job_item_path(job), remote: true %></td>
     </tr>
   <% end %>
 </table>

@@ -19,9 +19,8 @@ class DelayedJobsController < ApplicationController
     end
   end
 
-  def queue
-    @delayed_job = Delayed::Job.find(params[:id])
-    @delayed_job.queue!
+  def run
+    Delayed::Worker.new.run(Delayed::Job.find(params[:id])) 
 
     redirect_to delayed_jobs_path
   end
