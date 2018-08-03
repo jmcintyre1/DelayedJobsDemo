@@ -1,5 +1,6 @@
 class DelayedJobsController < ApplicationController
-  
+  helper_method :sort_column, :sort_direction
+
   def show
     @delayed_job = Delayed::Job.find(params[:id])
   end
@@ -17,6 +18,8 @@ class DelayedJobsController < ApplicationController
     else
         Delayed::Job.all
     end
+
+    @delayed_jobs = @delayed_jobs.order("#{sort_column} #{sort_direction}")
   end
 
   def run
@@ -28,6 +31,18 @@ class DelayedJobsController < ApplicationController
   private
   def delayed_job_params
     params.require(:delayed_job).permit(:id, :queue)
+  end
+
+  def sortable_columns
+    ["id"]
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end
