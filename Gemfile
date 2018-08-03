@@ -26,9 +26,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#Added gems
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'delayed-web'
+gem 'will_paginate'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

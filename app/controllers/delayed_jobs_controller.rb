@@ -19,7 +19,7 @@ class DelayedJobsController < ApplicationController
         Delayed::Job.all
     end
 
-    @delayed_jobs = @delayed_jobs.order("#{sort_column} #{sort_direction}")
+    @delayed_jobs = @delayed_jobs.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 15)
   end
 
   def run
