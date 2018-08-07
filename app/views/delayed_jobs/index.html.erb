@@ -4,7 +4,8 @@
 <%= form_tag(delayed_jobs_path, method: :get) do %>
   <%= text_field_tag :term, params[:term] %>
   <%= submit_tag 'Search', name: nil %>
-  <!--- <%= select(:delayed_job, :queue, [['talk', 'talk'], ['N/A', '']]) %> -->
+  <%= link_to "Show Errors", delayed_jobs_path(:category=>"errors") %>
+  <%= link_to "Reset", delayed_jobs_path %>
 <% end %>
 </div>
 

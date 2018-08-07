@@ -14,9 +14,11 @@ class DelayedJobsController < ApplicationController
 
   def index
     @delayed_jobs = if params[:term]
-        Delayed::Job.where('id LIKE ? OR queue LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
+      Delayed::Job.where('id LIKE ? OR queue LIKE ?', "%#{params[:term]}%", "%#{params[:term]}%")
+    elsif params[:category]
+      Delayed::Job.where.not(last_error: 'null')
     else
-        Delayed::Job.all
+      Delayed::Job.all
     end
 
     @delayed_jobs = @delayed_jobs.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 15)
@@ -24,6 +26,12 @@ class DelayedJobsController < ApplicationController
 
   def run
     Delayed::Worker.new.run(Delayed::Job.find(params[:id])) 
+
+    redirect_to delayed_jobs_path
+  end
+
+  def show_errors
+    @error = true
 
     redirect_to delayed_jobs_path
   end
