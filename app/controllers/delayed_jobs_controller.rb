@@ -29,13 +29,7 @@ class DelayedJobsController < ApplicationController
 
     redirect_to delayed_jobs_path
   end
-
-  def show_errors
-    @error = true
-
-    redirect_to delayed_jobs_path
-  end
-
+  
   private
   def delayed_job_params
     params.require(:delayed_job).permit(:id, :queue)

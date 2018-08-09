@@ -2,17 +2,25 @@
 
 <%= link_to 'Back', delayed_jobs_path %>
 
-
 <h3>Handler:</h3>
 <pre><%= @delayed_job.handler %></pre>
 
 <h3>Last Error:</h3>
 <pre>
 <% if @delayed_job.last_error.present? %>
-  <%= @delayed_job.last_error %>
+  <div style="overflow: auto; width:auto; height:250px;">
+<%= @delayed_job.last_error %>
+  </div>
 <% else %>
 No Previous Error
 <% end %>
 </pre>
 
-<%= button_to 'Delete', delayed_job_path(@delayed_job), method: :delete, data: { confirm: 'Are you sure?' }, style: "color: red;" %>
+<div style="display: inline-block;">
+  <div style="float: left;">
+    <%= button_to "Run Job", run_delayed_job_path(@delayed_job), {:class => "button1", :style => "background-color:#4e9af1"} %>
+  </div>
+  <div style="float: right;">
+    <%= button_to "Delete", delayed_job_path(@delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, class: "button1", style: "background-color:red;" %>
+  </div>
+</div>
