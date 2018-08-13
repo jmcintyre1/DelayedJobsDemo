@@ -1,6 +1,4 @@
 class DelayedJobsController < ApplicationController
-  helper_method :sort_column, :sort_direction
-
   def show
     @delayed_job = Delayed::Job.find(params[:id])
   end
@@ -21,7 +19,7 @@ class DelayedJobsController < ApplicationController
       Delayed::Job.all
     end
 
-    @delayed_jobs = @delayed_jobs.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 15)
+    @delayed_jobs = @delayed_jobs.paginate(:page => params[:page], :per_page => 15)
   end
 
   def run
@@ -29,22 +27,9 @@ class DelayedJobsController < ApplicationController
 
     redirect_to delayed_jobs_path
   end
-  
+
   private
   def delayed_job_params
     params.require(:delayed_job).permit(:id, :queue)
   end
-
-  def sortable_columns
-    ["id"]
-  end
-
-  def sort_column
-    sortable_columns.include?(params[:column]) ? params[:column] : "id"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
 end
