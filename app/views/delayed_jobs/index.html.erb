@@ -1,59 +1,65 @@
-<h1 style="text-align:center;">Delayed Jobs</h1>
-
-<div class="search">
-<%= form_tag(delayed_jobs_path, method: :get) do %>
-  <%= text_field_tag :term, params[:term] %>
-  &nbsp
-  <%= submit_tag 'Search', name: nil, :class => "button_blue" %>
-  &nbsp
-  <%= link_to "Show Errors", delayed_jobs_path(:category=>"errors"), :class => "link1" %>
-  |
-  <%= link_to "Reset", delayed_jobs_path, :class => "link1" %>
-<% end %>
+<div class = "banner">
+  <div class = "banner-content">
+    <h1>Delayed Jobs</h1>
+  </div>
 </div>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Queue</th>
-    <th>Priority</th>
-    <th>Attempts</th>
-	  <th>Created At</th>
-    <th>Run At</th>
-    <th colspan = "2">Actions</th>
-  </tr>
-
-  <% row_count = 0 %>
-	<% @delayed_jobs.each do |delayed_job| %>
-    <% if delayed_job.last_error.present? %>
-      <% background_color = "ff9f9f" %>
-    <% elsif row_count % 2 == 0 %>
-      <% background_color = "f1f1ef" %>
-    <% else %>
-      <% background_color = "ffffff" %>
-    <% end %>
-    <tr bgcolor = "#<%= background_color %>">
-      <td><%= link_to delayed_job.id, delayed_job_path(delayed_job), :class => "link1" %></td>
-      <td><%= delayed_job.queue %></td>
-      <td><%= delayed_job.priority %></td>
-      <td><%= delayed_job.attempts %></td>
-      <td><%= delayed_job.created_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
-      <td><%= delayed_job.run_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
-      <td><%= button_to "Run Job", run_delayed_job_path(delayed_job), :class => "button_blue" %></td>
-      <td><%= button_to "Delete", delayed_job_path(delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, class: "button_red" %></td>
-    </tr>
-    <% row_count += 1 %>
+<div class = "main-content">
+  <div class="search">
+  <%= form_tag(delayed_jobs_path, method: :get) do %>
+    <%= text_field_tag :term, params[:term] %>
+    &nbsp
+    <%= submit_tag 'Search', name: nil, :class => "button_blue" %>
+    &nbsp
+    <%= link_to "Show Errors", delayed_jobs_path(:category=>"errors"), :class => "link1" %>
+    <b>|</b>
+    <%= link_to "Reset", delayed_jobs_path, :class => "link1" %>
   <% end %>
-</table>
+  </div>
 
-<div class="pagination">
-<%= will_paginate @delayed_jobs %>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Queue</th>
+      <th>Priority</th>
+      <th>Attempts</th>
+      <th>Created At</th>
+      <th>Run At</th>
+      <th colspan = "2">Actions</th>
+    </tr>
+
+    <% row_count = 0 %>
+    <% @delayed_jobs.each do |delayed_job| %>
+      <% if delayed_job.last_error.present? %>
+        <% background_color = "ff9f9f" %>
+      <% elsif row_count % 2 == 0 %>
+        <% background_color = "f1f1ef" %>
+      <% else %>
+        <% background_color = "ffffff" %>
+      <% end %>
+      <tr bgcolor = "#<%= background_color %>">
+        <td><%= link_to delayed_job.id, delayed_job_path(delayed_job), :class => "link1" %></td>
+        <td><%= delayed_job.queue %></td>
+        <td><%= delayed_job.priority %></td>
+        <td><%= delayed_job.attempts %></td>
+        <td><%= delayed_job.created_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
+        <td><%= delayed_job.run_at.strftime("%I:%M:%S%p on %m/%d/%Y") %></td>
+        <td><%= button_to "Run Job", run_delayed_job_path(delayed_job), :class => "button_blue" %></td>
+        <td><%= button_to "Delete", delayed_job_path(delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, class: "button_red" %></td>
+      </tr>
+      <% row_count += 1 %>
+    <% end %>
+  </table>
+
+  <div class="pagination">
+  <%= will_paginate @delayed_jobs %>
+  </div>
+
+  <% if Delayed::Job.all.count <= 15 %>
+  <p align="center">Displaying <%= Delayed::Job.all.count %> of <%= Delayed::Job.all.count %> results<p>
+  <% else %>
+  <p align="center">Displaying 15 of <%= Delayed::Job.all.count %> results<p>
+  <% end %>
+
+  <%= link_to 'Jobs', controller: 'job_items'%>
 </div>
-
-<% if Delayed::Job.all.count <= 15 %>
-<p align="center">Displaying <%= Delayed::Job.all.count %> of <%= Delayed::Job.all.count %> results<p>
-<% else %>
-<p align="center">Displaying 15 of <%= Delayed::Job.all.count %> results<p>
-<% end %>
-
-<%= link_to 'Jobs', controller: 'job_items'%>

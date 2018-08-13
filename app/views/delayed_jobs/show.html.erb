@@ -1,27 +1,33 @@
-<h1>Job <%= @delayed_job.id %></h1>
-
-<%= link_to 'Back', delayed_jobs_path, :class => "link1" %>
-
-<h3>Handler:</h3>
-<pre><%= @delayed_job.handler %></pre>
-
-<h3>Last Error:</h3>
-<pre>
-<% if @delayed_job.last_error.present? %>
-  <div style="overflow: auto; width:auto; height:250px;">
-<%= @delayed_job.last_error %>
+<div class = "banner">
+  <div class = "banner-content">
+    <h1>Job <%= @delayed_job.id %></h1>
   </div>
-<% else %>
-No Previous Error
-<% end %>
-</pre>
+</div>
 
-<div style="display: inline-block;">
-  <div style="float: left;">
-    <%= button_to "Run Job", run_delayed_job_path(@delayed_job), {:class => "button_blue"} %>
-  </div>
-  &nbsp
-  <div style="float: right;">
-    <%= button_to "Delete", delayed_job_path(@delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, class: "button_red" %>
+<div class = "main-content">
+  <%= link_to 'Back', delayed_jobs_path, :class => "link1" %>
+
+  <h3>Handler:</h3>
+  <pre><%= @delayed_job.handler %></pre>
+
+  <h3>Last Error:</h3>
+  <pre>
+  <% if @delayed_job.last_error.present? %>
+    <div style="overflow: auto; width:auto; height:250px;">
+  <%= @delayed_job.last_error %>
+    </div>
+  <% else %>
+  No Previous Error
+  <% end %>
+  </pre>
+
+  <div style="display: inline-block;">
+    <div style="float: left;">
+      <%= button_to "Run Job", run_delayed_job_path(@delayed_job), {:class => "button_blue"} %>
+    </div>
+    &nbsp
+    <div style="float: right;">
+      <%= button_to "Delete", delayed_job_path(@delayed_job), :method => :delete, data: { confirm: 'Are you sure?' }, class: "button_red" %>
+    </div>
   </div>
 </div>

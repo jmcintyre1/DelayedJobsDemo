@@ -2,9 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.banner { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  background-color: #3482bf; 
+  width: 100%; 
+}
+.banner-content { 
+  width: 800px; 
+  margin: 0 auto; 
+  padding: 10px;
+}
+.main-content { 
+  padding-top: 50px;
+}
+
 //For the delayed job table
 table {  
-  color: #333;
+  color: #666;
   font-family: Helvetica, Arial, sans-serif;
   width: 1000px;
   border-collapse: collapse; 
@@ -28,6 +44,7 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
+  color: white;
 }
 
 //For the search bar
@@ -62,24 +79,25 @@ h1 {
 
 //For all link_to's
 .link1 {
-  color: black;
+  color: #666;
   font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
 }
 
 .link1:hover {
   text-decoration: underline;
-  color: black;
+  color: #666;
   background-color: transparent;
 }
 
 .link1:active {
-  color: black;
+  color: #666;
 }
 
 .link1:visited {
-  color: black;
+  color: #666;
 }
 
 //For Pagination Bar
