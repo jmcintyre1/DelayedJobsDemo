@@ -14,10 +14,10 @@
   <pre>
   <% if @delayed_job.last_error.present? %>
     <div style="overflow: auto; width:auto; height:250px;">
-  <%= @delayed_job.last_error %>
+<%= @delayed_job.last_error %>
     </div>
   <% else %>
-  No Previous Error
+No Previous Error
   <% end %>
   </pre>
 

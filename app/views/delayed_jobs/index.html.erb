@@ -53,13 +53,8 @@
 
   <div class="pagination">
   <%= will_paginate @delayed_jobs %>
+  <%= page_entries_info @delayed_jobs, :model => Delayed::Job, :html => false %>
   </div>
-
-  <% if Delayed::Job.all.count <= 15 %>
-  <p align="center">Displaying <%= Delayed::Job.all.count %> of <%= Delayed::Job.all.count %> results<p>
-  <% else %>
-  <p align="center">Displaying 15 of <%= Delayed::Job.all.count %> results<p>
-  <% end %>
 
   <%= link_to 'Jobs', controller: 'job_items'%>
 </div>

@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+  will_paginate:
+    Delayed::Job:
+      page_entries_info:
+        single_page:
+          zero:  "No Delayed Jobs Found"
+          one:   "Displaying one delayed job"
+          other: "Displaying all %{count} jobs"
+        multi_page: "Displaying jobs %{from} - %{to} of %{count} in total"

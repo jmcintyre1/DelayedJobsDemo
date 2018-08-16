@@ -10,12 +10,12 @@
   width: 100%; 
 }
 .banner-content { 
-  width: 800px; 
+  width: 800px;
   margin: 0 auto; 
-  padding: 10px;
+  padding: 0px;
 }
 .main-content { 
-  padding-top: 50px;
+  padding-top: 40px;
 }
 
 //For the delayed job table
@@ -131,3 +131,10 @@ h1 {
   margin-right: 1em; }
 .pagination .next_page {
   margin-left: 1em; }
+
+::selection {
+  background: lighten(#9d9b97, 20%);
+}
+::-moz-selection {
+  background: lighten(#9d9b97, 20%);
+}
