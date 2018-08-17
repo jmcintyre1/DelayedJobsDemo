@@ -29,7 +29,6 @@ gem 'jbuilder', '~> 2.5'
 #Added gems
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'delayed-web'
 gem 'will_paginate'
 
 # Use ActiveStorage variant
